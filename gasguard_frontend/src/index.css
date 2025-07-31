@@ -1,0 +1,624 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GasGuard DeFi Design System - Futuristic Glassmorphism & Premium Web3 Theme
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Base colors - Deep space dark theme with neon accents */
+    --background: 240 25% 5%;
+    --foreground: 0 0% 98%;
+
+    /* Card system with advanced glassmorphism */
+    --card: 240 20% 8%;
+    --card-foreground: 0 0% 98%;
+    --glass: 240 15% 12%;
+
+    --popover: 240 20% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Primary - Cyber Purple with Electric Blue */
+    --primary: 270 91% 65%;
+    --primary-foreground: 240 25% 5%;
+    --primary-glow: 270 91% 75%;
+    --primary-variant: 280 100% 70%;
+
+    /* Secondary - Electric Green */
+    --secondary: 180 100% 60%;
+    --secondary-foreground: 240 25% 5%;
+
+    /* Muted elements */
+    --muted: 240 15% 12%;
+    --muted-foreground: 240 15% 65%;
+
+    /* Accent - Neon Blue */
+    --accent: 195 100% 60%;
+    --accent-foreground: 240 25% 5%;
+
+    /* Status colors with neon theme */
+    --destructive: 0 100% 65%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 142 100% 55%;
+    --warning: 45 100% 65%;
+
+    /* Interactive elements */
+    --border: 240 20% 18%;
+    --input: 240 20% 15%;
+    --ring: 270 91% 65%;
+
+    /* Design tokens */
+    --radius: 1rem;
+    
+    /* Advanced Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary)));
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+    --gradient-hero: radial-gradient(ellipse at center, hsl(var(--primary) / 0.15) 0%, transparent 50%), 
+                     linear-gradient(135deg, hsl(var(--background)), hsl(240 30% 8%));
+    --gradient-cyber: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
+    
+    /* Advanced Shadows & Effects */
+    --shadow-glow: 0 0 60px hsl(var(--primary) / 0.4);
+    --shadow-glow-secondary: 0 0 40px hsl(var(--secondary) / 0.3);
+    --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    --shadow-cyber: 0 0 30px hsl(var(--primary) / 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    --backdrop-blur: blur(24px);
+    --backdrop-blur-strong: blur(40px);
+    
+    /* Advanced Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-cyber: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Light mode overrides - Clean, modern light theme with better contrast */
+  .light {
+    --background: 255 255 255;
+    --foreground: 15 23 42;
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+    --primary: 37 99 235;
+    --primary-foreground: 255 255 255;
+    --secondary: 241 245 249;
+    --secondary-foreground: 15 23 42;
+    --muted: 248 250 252;
+    --muted-foreground: 71 85 105;
+    --accent: 236 254 255;
+    --accent-foreground: 15 23 42;
+    --border: 203 213 225;
+    --input: 203 213 225;
+    --ring: 37 99 235;
+    --sidebar-background: 255 255 255;
+    --sidebar-foreground: 15 23 42;
+    --sidebar-primary: 37 99 235;
+    --sidebar-primary-foreground: 255 255 255;
+    --sidebar-accent: 248 250 252;
+    --sidebar-accent-foreground: 15 23 42;
+    --sidebar-border: 203 213 225;
+    --sidebar-ring: 37 99 235;
+  }
+}
+
+/* Light theme specific glassmorphism adjustments */
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.light .glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+}
+
+.light .cyber-mesh::before {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(16, 185, 129, 0.05));
+}
+
+.light .cyber-glow {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+}
+
+.light .neon-text {
+  color: rgb(37 99 235);
+  text-shadow: 0 0 10px rgba(37, 99, 235, 0.6);
+}
+
+.light body {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  color: rgb(15 23 42);
+}
+
+.light .hero-gradient {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(16, 185, 129, 0.05));
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--gradient-hero);
+    background-attachment: fixed;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  /* Advanced Glassmorphism utilities */
+  .glass {
+    background: var(--gradient-glass);
+    backdrop-filter: var(--backdrop-blur);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-cyber);
+  }
+  
+  .glass-card {
+    background: var(--gradient-glass);
+    backdrop-filter: var(--backdrop-blur);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-cyber);
+    opacity: 0.3;
+  }
+
+  /* Enhanced Glow effects */
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-secondary {
+    box-shadow: var(--shadow-glow-secondary);
+  }
+
+  .cyber-glow {
+    box-shadow: var(--shadow-cyber);
+  }
+
+  /* Futuristic transitions */
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+
+  .transition-cyber {
+    transition: var(--transition-cyber);
+  }
+
+  /* Cyber mesh pattern */
+  .cyber-mesh {
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Neon text effect */
+  .neon-text {
+    color: hsl(var(--primary));
+    text-shadow: 
+      0 0 5px hsl(var(--primary) / 0.5),
+      0 0 10px hsl(var(--primary) / 0.3),
+      0 0 15px hsl(var(--primary) / 0.2);
+  }
+
+  /* Pulse animation */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+    }
+  }
+
+  /* Scrollbar styling with neon theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 4px;
+    border: 1px solid hsl(var(--border));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.3);
+  }
+}
+
+/* Additional light theme improvements */
+.light *:hover[class*="hover:bg-white/10"] {
+  background-color: rgba(37, 99, 235, 0.1) !important;
+}
+
+.light *:hover[class*="hover:bg-primary/20"] {
+  background-color: rgba(37, 99, 235, 0.2) !important;
+}
+
+.light .text-muted-foreground {
+  color: rgb(71 85 105) !important;
+}
+
+.light [class*="border-white/10"] {
+  border-color: rgba(37, 99, 235, 0.2) !important;
+}
+
+.light .bg-muted {
+  background-color: rgb(248 250 252) !important;
+}
+
+/* Light theme switch/toggle button fixes - darker colors */
+.light [data-state="checked"] {
+  background-color: rgb(71 85 105) !important; /* Dark slate for better visibility */
+}
+
+.light [data-state="unchecked"] {
+  background-color: rgb(148 163 184) !important; /* Medium gray */
+}
+
+.light .bg-primary {
+  background-color: rgb(37 99 235) !important;
+}
+
+.light .text-primary-foreground {
+  color: rgb(255 255 255) !important;
+}
+
+/* Specific switch component styling for light theme - darker colors */
+.light [data-radix-switch-root][data-state="checked"] {
+  background-color: rgb(71 85 105) !important; /* Dark slate for checked state */
+}
+
+.light [data-radix-switch-root][data-state="unchecked"] {
+  background-color: rgb(148 163 184) !important; /* Medium gray for unchecked state */
+}
+
+.light [data-radix-switch-thumb] {
+  background-color: rgb(255 255 255) !important;
+}
+
+/* Ensure better text contrast in light mode */
+.light h1, .light h2, .light h3, .light h4, .light h5, .light h6 {
+  color: rgb(15 23 42) !important;
+}
+
+.light p, .light span, .light div {
+  color: rgb(51 65 85);
+}
+
+.light .font-bold, .light .font-semibold {
+  color: rgb(15 23 42) !important;
+}
+
+/* Fix gradient text visibility in light mode */
+.light .bg-gradient-to-r {
+  background: linear-gradient(to right, rgb(37 99 235), rgb(16 185 129)) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+/* Fix button text visibility in light mode - make buttons black text */
+.light button {
+  color: rgb(255 255 255) !important; /* White text for buttons */
+}
+
+.light button span {
+  color: rgb(255 255 255) !important; /* White text for button spans */
+}
+
+.light .text-primary {
+  color: rgb(15 23 42) !important;
+}
+
+/* Specific button variant fixes for light theme */
+.light [data-variant="default"] {
+  color: rgb(255 255 255) !important; /* Keep white text on buttons */
+  background-color: rgb(37 99 235) !important;
+}
+
+.light [data-variant="outline"] {
+  color: rgb(255 255 255) !important; /* White text for outline buttons */
+  border-color: rgb(37 99 235) !important;
+  background-color: rgb(37 99 235) !important; /* Add background so white text is visible */
+}
+
+.light [data-variant="ghost"] {
+  color: rgb(255 255 255) !important; /* White text for ghost buttons */
+  background-color: rgba(37, 99, 235, 0.8) !important; /* Add background so white text is visible */
+}
+
+/* Connect Wallet button styling in light theme */
+.light button[class*="cyber"] {
+  background: linear-gradient(135deg, rgb(37 99 235), rgb(16 185 129)) !important;
+  color: white !important;
+  border: 1px solid rgb(37 99 235) !important;
+}
+
+.light button[class*="glass"] {
+  background: rgba(37, 99, 235, 0.1) !important;
+  color: rgb(37 99 235) !important;
+  border: 1px solid rgba(37, 99, 235, 0.3) !important;
+}
+
+/* Remove unwanted hover effects from cyber and glass buttons in light theme */
+.light button:hover[class*="cyber"] {
+  background: linear-gradient(135deg, rgb(37 99 235), rgb(16 185 129)) !important;
+  color: white !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.light button:hover[class*="glass"] {
+  background: rgba(37, 99, 235, 0.1) !important;
+  color: rgb(37 99 235) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Fix wallet button and other buttons in Header */
+.light button {
+  color: rgb(37 99 235) !important;
+}
+
+.light button[class*="cyber"], .light button[class*="hero"] {
+  color: white !important;
+}
+
+/* Fix ghost button variant in light theme */
+.light button[class*="ghost"] {
+  color: rgb(51 65 85) !important;
+}
+
+.light button[class*="ghost"]:hover {
+  background-color: inherit !important;
+  color: rgb(51 65 85) !important;
+  transform: none !important;
+}
+
+/* Fix outline button variant in light theme */
+.light button[class*="outline"] {
+  color: rgb(37 99 235) !important;
+  border-color: rgba(37, 99, 235, 0.3) !important;
+}
+
+.light button[class*="outline"]:hover {
+  background-color: rgba(37, 99, 235, 0.1) !important;
+}
+
+/* Disable unwanted hover effects on buttons in light theme */
+.light button:not([class*="cyber"]):not([class*="hero"]):hover {
+  background-color: inherit !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove hover effects from switches completely */
+.light [data-radix-switch-root]:hover {
+  background-color: inherit !important;
+}
+
+/* Comprehensive button text color fixes for light theme */
+.light button:not([class*="cyber"]):not([class*="variant-default"]) {
+  color: rgb(15 23 42) !important;
+}
+
+.light button span:not([class*="sr-only"]) {
+  color: inherit !important;
+}
+
+/* Fix navigation links and primary text elements */
+.light a, .light .text-foreground {
+  color: rgb(15 23 42) !important;
+}
+
+/* Ensure primary variant buttons keep white text */
+.light button[class*="bg-primary"] {
+  color: rgb(255 255 255) !important;
+}
+
+.light button[class*="bg-primary"] span {
+  color: rgb(255 255 255) !important;
+}
+
+/* Fix button text colors for blue backgrounds */
+.light button[class*="bg-primary"],
+.light button[class*="bg-blue"],
+.light .bg-primary button,
+.light [class*="bg-blue"] button {
+  color: black !important;
+}
+
+/* Specific fixes for primary buttons */
+.light [data-variant="default"] {
+  background-color: rgb(37 99 235) !important;
+  color: rgb(255 255 255) !important; /* White text */
+}
+
+/* Fix small size buttons */
+.light button[size="sm"] {
+  color: rgb(255 255 255) !important; /* White text for small buttons */
+}
+
+/* Toggle button styling for light theme - make backgrounds white */
+.light [data-state="checked"] {
+  background-color: white !important;
+}
+
+.light [data-state="unchecked"] {
+  background-color: white !important;
+}
+
+.light button[role="switch"] {
+  background-color: white !important;
+}
+
+/* Make the toggle circle/thumb grey in light theme */
+.light [data-state="checked"] > span {
+  background-color: rgb(107 114 128) !important;
+}
+
+.light [data-state="unchecked"] > span {
+  background-color: rgb(107 114 128) !important;
+}
+
+.light button[role="switch"] > span {
+  background-color: rgb(107 114 128) !important;
+}
+
+/* Gas fee threshold slider styling for light theme */
+.light input[type="range"] {
+  background: rgb(0 0 0) !important; /* Black track */
+}
+
+.light input[type="range"]::-webkit-slider-track {
+  background: rgb(0 0 0) !important; /* Black track for webkit */
+  height: 8px !important;
+  border-radius: 4px !important;
+}
+
+.light input[type="range"]::-moz-range-track {
+  background: rgb(0 0 0) !important; /* Black track for firefox */
+  height: 8px !important;
+  border-radius: 4px !important;
+}
+
+/* Force all button text to be white in light theme - STRONGEST RULES */
+.light button,
+.light button *,
+.light .btn,
+.light [role="button"],
+.light [class*="button"] {
+  color: white !important;
+}
+
+.light button:not(:hover),
+.light button:hover,
+.light button:focus,
+.light button:active,
+.light button:visited {
+  color: white !important;
+}
+
+/* Ensure buttons have proper background to show white text */
+.light button[variant="default"],
+.light button[data-variant="default"],
+.light .button-primary {
+  background-color: rgb(37 99 235) !important;
+  color: white !important;
+}
+
+.light button[variant="outline"],
+.light button[data-variant="outline"] {
+  background-color: rgb(37 99 235) !important;
+  color: white !important;
+  border: 1px solid rgb(37 99 235) !important;
+}
+
+.light button[variant="ghost"],
+.light button[data-variant="ghost"] {
+  background-color: rgba(37, 99, 235, 0.8) !important;
+  color: white !important;
+}
+
+/* Specific buttons that should have BLACK text in light theme */
+.light button[variant="outline"][size="sm"],
+.light .reset-button,
+.light .view-button,
+.light .secondary-button {
+  color: black !important;
+  background-color: rgb(226 232 240) !important;
+  border: 1px solid rgb(148 163 184) !important;
+}
+
+/* Override for outline buttons to have black text */
+.light button[data-variant="outline"]:not(.primary-action) {
+  color: black !important;
+  background-color: rgb(248 250 252) !important;
+  border: 1px solid rgb(148 163 184) !important;
+}
+
+/* Force specific button text to be black - highest specificity */
+.light button[variant="outline"],
+.light button[data-variant="outline"],
+.light .button-outline,
+.light button:contains("Reset"),
+.light button:contains("View"),
+.light button:contains("Dismiss") {
+  color: black !important;
+  background-color: rgb(248 250 252) !important;
+  border: 1px solid rgb(148 163 184) !important;
+}
+
+/* Target small outline buttons specifically */
+.light button[variant="outline"][size="sm"],
+.light button[data-variant="outline"][size="sm"] {
+  color: black !important;
+  background-color: rgb(248 250 252) !important;
+  border: 1px solid rgb(148 163 184) !important;
+}
+
+/* Custom class for specific buttons that need black text in light theme */
+.light .light-theme-black-text {
+  color: black !important;
+  background-color: rgb(248 250 252) !important;
+  border: 1px solid rgb(148 163 184) !important;
+}
+
+.light .light-theme-black-text:hover {
+  color: black !important;
+  background-color: rgb(241 245 249) !important;
+}
