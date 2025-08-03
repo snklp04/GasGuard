@@ -29,4 +29,11 @@ GasGuard is a lightweight, futuristic Web3 dashboard designed to help users moni
 
 ---
 
+## 📜 How to Run Locally
+1. Clone the repo
+2. Run `npm install` for both frontend and backend
+3. Frontend: `npm run dev`
+4. Backend: `npm start`
+5. Connect MetaMask and start tracking wallet security
 
+---
