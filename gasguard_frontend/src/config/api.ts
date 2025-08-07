@@ -1,6 +1,6 @@
 // API Configuration
 export const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-backend-url.vercel.app' // Replace with your actual backend URL
+  ? 'https://gas-guard-one.vercel.app/' // Your actual backend URL
   : 'http://localhost:3001';
 
 // API Endpoints
