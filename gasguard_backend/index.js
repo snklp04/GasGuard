@@ -1,82 +1,26 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const axios = require('axios');
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-// Enable CORS for all routes
-app.use(cors());
-app.use(express.json());
-
-// Health check endpoint
-app.get('/', (req, res) => {
-  res.json({ message: 'GasGuard Backend API is running!', version: '1.0.0' });
-});
-
-// Example: Fetch gas data from OKX DEX API
-app.get('/api/okx/gas', async (req, res) => {
-  try {
-    // Fallback to Etherscan gas tracker
-    const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
-    const url = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${ETHERSCAN_API_KEY}`;
-    const response = await axios.get(url);
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+module.exports = (req, res) => {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
   }
-});
 
-// TODO: Add more endpoints for approvals, security, etc.
-
-// For local development
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`GasGuard backend running on port ${PORT}`);
-  });
-}
-
-// Export for Vercel
-module.exports = app;
-
-// Token approvals endpoint
-app.get('/api/okx/approvals', async (req, res) => {
-  const { address } = req.query;
-  if (!address) return res.status(400).json({ error: 'Missing address parameter' });
-  try {
-    // Example OKX endpoint for approvals (replace with actual endpoint if different)
-    const response = await axios.get(`https://www.okx.com/api/v5/dex/public/token-approval?address=${address}`, {
-      headers: {
-        'OK-ACCESS-KEY': process.env.OKX_API_KEY
-      }
+  // Health check
+  if (req.url === '/' || req.url === '') {
+    res.status(200).json({ 
+      message: 'GasGuard Backend API is running!', 
+      version: '1.0.0',
+      endpoints: ['/api/alerts', '/api/okx/gas', '/api/okx/approvals']
     });
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    return;
   }
-});
 
-// Contract security endpoint
-app.get('/api/okx/security', async (req, res) => {
-  const { contractAddress } = req.query;
-  if (!contractAddress) return res.status(400).json({ error: 'Missing contractAddress parameter' });
-  try {
-    // Example OKX endpoint for contract security (replace with actual endpoint if different)
-    const response = await axios.get(`https://www.okx.com/api/v5/dex/public/security-check?contractAddress=${contractAddress}`, {
-      headers: {
-        'OK-ACCESS-KEY': process.env.OKX_API_KEY
-      }
-    });
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Alerts endpoint
-app.get('/api/alerts', async (req, res) => {
-  try {
-    // Mock alerts data - replace with actual OKX API or database
+  // Alerts endpoint
+  if (req.url === '/api/alerts' && req.method === 'GET') {
     const alerts = [
       {
         id: 1,
@@ -95,57 +39,25 @@ app.get('/api/alerts', async (req, res) => {
         priority: 'high'
       }
     ];
-    res.json({ success: true, data: alerts });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(200).json({ success: true, data: alerts });
+    return;
   }
-});
 
-// Dismiss alert endpoint
-app.post('/api/alerts/:id/dismiss', async (req, res) => {
-  try {
-    const { id } = req.params;
-    // In a real app, you'd update the database here
-    res.json({ success: true, message: `Alert ${id} dismissed` });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Take action on alert endpoint
-app.post('/api/alerts/:id/action', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { action } = req.body;
-    // In a real app, you'd handle the specific action here
-    res.json({ success: true, message: `Action ${action} taken for alert ${id}` });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Revoke approval endpoint
-app.post('/api/approvals/revoke', async (req, res) => {
-  try {
-    const { tokenAddress, spenderAddress, userAddress } = req.body;
-    
-    if (!tokenAddress || !spenderAddress || !userAddress) {
-      return res.status(400).json({ 
-        error: 'Missing required parameters: tokenAddress, spenderAddress, userAddress' 
-      });
-    }
-
-    // Mock response - in a real app, you'd interact with the blockchain
-    res.json({ 
-      success: true, 
-      message: 'Approval revoke transaction prepared',
-      transactionData: {
-        to: tokenAddress,
-        data: '0x', // This would be the actual transaction data
-        gasLimit: '21000'
+  // Gas data endpoint
+  if (req.url === '/api/okx/gas' && req.method === 'GET') {
+    // Mock gas data
+    res.status(200).json({
+      status: '1',
+      message: 'OK',
+      result: {
+        SafeGasPrice: '20',
+        StandardGasPrice: '25',
+        FastGasPrice: '30'
       }
     });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    return;
   }
-});
+
+  // Default 404
+  res.status(404).json({ error: 'Endpoint not found' });
+};
