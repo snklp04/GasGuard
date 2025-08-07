@@ -1,22 +1,14 @@
 {
   "name": "gasguard",
   "version": "1.0.0",
-  "description": "",
+  "description": "GasGuard - Your Personal Firewall for Web3",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cd gasguard_frontend && npm install && npm run build",
+    "dev": "cd gasguard_frontend && npm run dev",
+    "vercel-build": "cd gasguard_frontend && npm install && npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "next": "^15.4.4",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.11"
-  }
+  "keywords": ["web3", "defi", "security", "gas", "ethereum"],
+  "author": "GasGuard Team",
+  "license": "MIT"
 }
