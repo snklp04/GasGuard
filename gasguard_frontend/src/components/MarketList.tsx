@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_ENDPOINTS } from '@/config/api';
 
 interface Market {
   instId: string;
@@ -13,7 +14,7 @@ const MarketList = () => {
   useEffect(() => {
     const fetchMarkets = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/markets");
+        const res = await fetch(API_ENDPOINTS.MARKETS);
         const data = await res.json();
         setMarkets(data.data);
         setLoading(false);

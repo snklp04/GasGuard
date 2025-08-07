@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { API_ENDPOINTS } from '@/config/api';
 
 const Alerts = () => {
   const { toast } = useToast();
@@ -16,15 +17,15 @@ const Alerts = () => {
   const [loadingId, setLoadingId] = useState(null);
 
   useEffect(() => {
-    fetch('/api/okx/alerts')
+    fetch(API_ENDPOINTS.ALERTS)
       .then(res => res.json())
-      .then(data => setAlerts(data.alerts || []));
+      .then(data => setAlerts(data.data || []));
   }, []);
 
   const handleDismiss = async (id) => {
     setLoadingId(id);
     try {
-      const res = await fetch(`/api/okx/alerts/dismiss`, {
+      const res = await fetch(API_ENDPOINTS.ALERTS_DISMISS(id), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id })
@@ -42,7 +43,7 @@ const Alerts = () => {
   const handleAction = async (id) => {
     setLoadingId(id);
     try {
-      const res = await fetch(`/api/okx/alerts/action`, {
+      const res = await fetch(API_ENDPOINTS.ALERTS_ACTION(id), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id })

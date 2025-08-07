@@ -4,6 +4,7 @@ import { CheckCircle, XCircle, ExternalLink, AlertTriangle } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { API_ENDPOINTS } from '@/config/api';
 
 interface Approval {
   id: string;
@@ -25,7 +26,7 @@ const TokenApprovals = ({ address }: TokenApprovalsProps) => {
   const [approvals, setApprovals] = useState<Approval[]>([]);
   useEffect(() => {
     if (!address) return;
-    fetch(`/api/okx/approvals?address=${address}`)
+    fetch(API_ENDPOINTS.APPROVALS(address))
       .then(res => res.json())
       .then(data => setApprovals(data.approvals || []));
   }, [address]);
@@ -42,7 +43,7 @@ const TokenApprovals = ({ address }: TokenApprovalsProps) => {
   const handleRevoke = async (id: string) => {
     // Placeholder for revoke logic
     console.log(`Revoking approval ${id}`);
-    await fetch(`/api/okx/approvals/revoke`, {
+    await fetch(API_ENDPOINTS.APPROVALS_REVOKE, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id })
