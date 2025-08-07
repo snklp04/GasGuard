@@ -17,7 +17,7 @@ GasGuard is a lightweight, futuristic Web3 dashboard designed to help users moni
 ## 🚀 Demo
 
 🌍 Live: [https://yourdeployment.vercel.app](https://yourdeployment.vercel.app)  
-🎥 Video Walkthrough: [YouTube Link]([https://youtube.com/demo](https://youtu.be/hh5EZY2Jax8 )
+🎥 Video Walkthrough: [YouTube Link](https://youtu.be/hh5EZY2Jax8 )
 
 ---
 
