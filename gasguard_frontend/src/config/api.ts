@@ -1,6 +1,6 @@
 // API Configuration
 export const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://gasguard-backend-omega.vercel.app'
+  ? 'https://gasguard-backend.vercel.app'
   : 'http://localhost:3001';
 
 // API Endpoints
