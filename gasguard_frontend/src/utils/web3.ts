@@ -1,5 +1,6 @@
 // Web3 utility functions for GasGuard
 import { ethers } from 'ethers';
+import { API_ENDPOINTS } from '../config/api';
 
 export interface GasData {
   low: number;
@@ -19,7 +20,7 @@ export interface TokenApproval {
 // Gas tracking utilities
 export const fetchGasData = async (): Promise<GasData> => {
   try {
-    const response = await fetch('/api/okx/gas');
+    const response = await fetch(API_ENDPOINTS.GAS_DATA);
     if (!response.ok) throw new Error('Failed to fetch gas data from backend');
     const okxData = await response.json();
     // Map OKX response to GasData format (adjust as needed based on actual API response)
@@ -56,7 +57,7 @@ export const connectWallet = async (): Promise<string | null> => {
 // Token approval utilities
 export const getTokenApprovals = async (address: string): Promise<TokenApproval[]> => {
   try {
-    const response = await fetch(`/api/okx/approvals?address=${address}`);
+    const response = await fetch(API_ENDPOINTS.APPROVALS(address));
     if (!response.ok) throw new Error('Failed to fetch token approvals from backend');
     const approvals = await response.json();
     return approvals;
@@ -73,7 +74,7 @@ export const checkContractSecurity = async (contractAddress: string): Promise<{
   reasons: string[];
 }> => {
   try {
-    const response = await fetch(`/api/okx/security?contractAddress=${contractAddress}`);
+    const response = await fetch(API_ENDPOINTS.SECURITY(contractAddress));
     if (!response.ok) throw new Error('Failed to check contract security from backend');
     const security = await response.json();
     return security;
