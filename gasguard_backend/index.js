@@ -1,43 +1,5 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const axios = require('axios');
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-// Enable CORS for all routes
-app.use(cors());
-app.use(express.json());
-
-// Health check endpoint
-app.get('/', (req, res) => {
-  res.json({ message: 'GasGuard Backend API is running!', version: '1.0.0' });
-});
-
-// Example: Fetch gas data from OKX DEX API
-app.get('/api/okx/gas', async (req, res) => {
-  try {
-    // Fallback to Etherscan gas tracker
-    const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
-    const url = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${ETHERSCAN_API_KEY}`;
-    const response = await axios.get(url);
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// TODO: Add more endpoints for approvals, security, etc.
-
-// For local development
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`GasGuard backend running on port ${PORT}`);
-  });
-}
-
-// Export for Vercel
-module.exports = app;
+// This file is no longer used - API is now in /api/index.js for Vercel deployment
+module.exports = require('./api/index.js');
 
 // Token approvals endpoint
 app.get('/api/okx/approvals', async (req, res) => {

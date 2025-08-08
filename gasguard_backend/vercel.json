@@ -1,20 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "index.js",
-      "use": "@vercel/node"
+  "functions": {
+    "api/index.js": {
+      "runtime": "nodejs18.x"
     }
-  ],
+  },
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.js"
-    }
-  ],
-  "env": {
-    "OKX_API_KEY": "@okx_api_key",
-    "ETHERSCAN_API_KEY": "@etherscan_api_key",
-    "NODE_ENV": "production"
-  }
+    { "src": "/(.*)", "dest": "/api/index.js" }
+  ]
 }
