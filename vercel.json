@@ -1,14 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "gasguard_frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
+  "buildCommand": "cd gasguard_frontend && npm install && npm run build",
+  "outputDirectory": "gasguard_frontend/dist",
   "routes": [
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
