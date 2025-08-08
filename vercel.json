@@ -2,21 +2,16 @@
   "version": 2,
   "builds": [
     {
-      "src": "gasguard_frontend/package.json",
+      "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "gasguard_frontend/dist"
       }
     }
   ],
   "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/gasguard_frontend/dist/index.html"
-    }
-  ],
-  "outputDirectory": "gasguard_frontend/dist"
+    { "handle": "filesystem" },
+    { "src": "/assets/(.*)", "dest": "/gasguard_frontend/dist/assets/$1" },
+    { "src": "/(.*)", "dest": "/gasguard_frontend/dist/index.html" }
+  ]
 }
